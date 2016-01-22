@@ -85,7 +85,7 @@ class Tsl2591():
         self.disable()
 
     def get_timing(self):
-        return self.timing
+        return self.integration_time
 
     def set_gain(self, gain):
         self.enable()
@@ -186,3 +186,20 @@ if __name__ == '__main__':
     full, ir = tsl.get_full_luminosity()  # read raw values (full spectrum and ir spectrum)
     lux = tsl.calculate_lux(full, ir)  # convert raw values to lux
     print (lux, full, ir)
+    print ()
+
+    def test(int_time=TSL2591_INTEGRATIONTIME_100MS, gain=TSL2591_GAIN_LOW):
+        tsl.set_gain(gain)
+        tsl.set_timing(int_time)
+        full, ir = tsl.get_full_luminosity()
+        lux = tsl.calculate_lux(full, ir) 
+        print ('Lux = %f  full = %i  ir = %i' % (lux, full, ir))
+        print("integration time = %i" % tsl.get_timing())
+        print("gain = %i \n" % tsl.get_gain())        
+
+    for i in range(6):
+        test(i,0)
+
+    for i in range(0, 0x31, 0x10):
+        test(0,i)
+
