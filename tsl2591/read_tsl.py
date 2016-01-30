@@ -192,7 +192,7 @@ if __name__ == '__main__':
         tsl.set_gain(gain)
         tsl.set_timing(int_time)
         full_test, ir_test = tsl.get_full_luminosity()
-        lux_test = tsl.calculate_lux(full, ir)
+        lux_test = tsl.calculate_lux(full_test, ir_test)
         print ('Lux = %f  full = %i  ir = %i' % (lux_test, full_test, ir_test))
         print("integration time = %i" % tsl.get_timing())
         print("gain = %i \n" % tsl.get_gain())        
