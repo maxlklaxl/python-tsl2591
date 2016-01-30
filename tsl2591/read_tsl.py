@@ -169,15 +169,15 @@ class Tsl2591(object):
         full, ir = self.get_full_luminosity()
         if channel == FULLSPECTRUM:
             # Reads two byte value from channel 0 (visible + infrared)
-            full
+            return full
         elif channel == INFRARED:
             # Reads two byte value from channel 1 (infrared)
             return ir
         elif channel == VISIBLE:
-            # Reads all and subtracts out just the visible!
+            # Reads all and subtracts out ir to give just the visible!
             return full - ir
-        # unknown channel!
-        return 0
+        else: # unknown channel!
+            return 0
 
 
 if __name__ == '__main__':
