@@ -156,12 +156,12 @@ class Tsl2591(object):
     def get_full_luminosity(self):
         self.enable()
         time.sleep(0.120*self.integration_time+1)  # not sure if we need it "// Wait x ms for ADC to complete"
-        ir = self.bus.read_word_data(
-                    self.sendor_address, COMMAND_BIT | REGISTER_CHAN1_LOW
-                    )
         full = self.bus.read_word_data(
                     self.sendor_address, COMMAND_BIT | REGISTER_CHAN0_LOW
                     )
+        ir = self.bus.read_word_data(
+                    self.sendor_address, COMMAND_BIT | REGISTER_CHAN1_LOW
+                    )                    
         self.disable()
         return full, ir
 
